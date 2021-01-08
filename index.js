@@ -6,6 +6,8 @@ const app = express();
 const dbUrl =
   "mongodb+srv://test:test1234@blogs-cluster-uwtkb.mongodb.net/collection?retryWrites=true&w=majority";
 
+let port = process.env.PORT || 9000;
+
 // Conncting to MongoDB
 mongoose
   .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -31,4 +33,6 @@ app.use("/api", projectsRoutes);
 // certificate endpoint
 app.use("/api", certificatesRoutes);
 // Assigning port number
-app.listen(9000);
+app.listen(port, () => {
+  console.log(`Listening on http://localhost:${port}`);
+});
